@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block b1 %}
+
+
+<div class="container row">
+{% for arnaba in arnaba_list %}
+
+<div class="card col-lg-3 " style="width: 18rem;">
+    <img src="{% static arnaba.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image">
+    <div class="card-body">
+      <h5 class="card-title">{{arnaba.name}}</h5>
+      <p class="card-text">{{arnaba.state}}</p>
+      <a href="{% url 'operation:detail' arnaba.id %}" class="btn btn-primary">متـــــابــعة</a>
+    </div>
+  </div>
+
+
+
+
+  {% endfor %}
+
+</div>
+
+
+
+{% endblock %}
+
+
+

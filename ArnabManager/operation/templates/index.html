@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block b1 %}
+
+  <!-- <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 boxy" >ONE</div>
+        <div class="col-lg-3 col-sm-6 boxy" >TWO</div>
+        <div class="col-lg-3 col-sm-6 boxy" >THREE</div>
+        <div class="col-lg-3 col-sm-6 boxy" >FOUR</div>
+      </div> -->
+
+
+
+<div class="container row">
+
+    <a href="{% url 'operation:arnaba_list' %}">
+        <div class="card col-lg-4 " style="width: 18rem;">
+        <img src="{% static 'arnaba.png' %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image">
+        <div class="card-body">
+          <h5 class="card-title">أمهات</h5>
+          <p class="card-text">الإجمـــالى</p>
+          <a href="{% url 'operation:arnaba_list' %}" class="btn btn-primary">متـــــابــعة</a>
+        </div>
+      </div>
+</a>
+
+      <div class="card col-lg-4 " style="width: 18rem;">
+        <img src="{% static 'arnab.png' %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image">
+        <div class="card-body">
+          <h5 class="card-title">ذكور</h5>
+          <p class="card-text">الإجمـــالى</p>
+          <a href="#" class="btn btn-primary">متـــــابــعة</a>
+        </div>
+      </div>
+
+
+    </div>
+{% endblock %}
