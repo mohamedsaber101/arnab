@@ -2,7 +2,14 @@ from django.db import models
 
 # Create your models here.
 class Arnaba(models.Model):
-
+    STATE_CHOICES = (
+        ('empty', 'فاضية'),
+        ('pregnant', 'مليانة'),
+        ('mated', 'متلقحة'),
+        ('feeding', 'مرضعة'),
+        ('pregnant-feeding', 'حامل ومرضعة'),
+        ('mated-feeding', 'متلقحة ومرضعة'),
+    )
     def __str__(self):
         return self.name
     name = models.CharField(max_length=200)
@@ -11,7 +18,7 @@ class Arnaba(models.Model):
     birth_date = models.DateField(default=None)
     birth_times = models.IntegerField(default=None)
     talqeeh_times = models.IntegerField(default=None)
-    state = models.CharField(max_length=200, default='فاضية')
+    state = models.CharField(max_length=200, choices= STATE_CHOICES, default='emmm')
     image =  models.CharField(max_length=200, default='arnaba.png')
 
     

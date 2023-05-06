@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import *
+from operation.forms import *
 # Create your views here.
 
 def index(request):
@@ -24,3 +25,20 @@ def detail(request, id):
 
 
 
+###### FORMS
+def arnaba_create(request):
+    form = NewArnabaForm()
+
+    if request.method == "POST":
+        form = NewArnabaForm(request.POST)
+
+        if form.is_valid():
+               form.save(commit=True)
+               return arnaba_list(request)
+        else:
+               print('ERROR INVALID')
+    context = {
+            'form': form
+        }
+    return render(request, 'arnaba_create.html', context)
+    
