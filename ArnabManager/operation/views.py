@@ -17,7 +17,7 @@ def arnaba_list(request):
     return render(request, 'arnaba_list.html', context)
 
 def detail(request, id):
-        arnab = Arnab.objects.get(pk=id)
+        arnab = Arnaba.objects.get(pk=id)
         context = {
             'arnab': arnab
         }

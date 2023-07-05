@@ -3,12 +3,12 @@ from django.db import models
 # Create your models here.
 class Arnaba(models.Model):
     STATE_CHOICES = (
-        ('empty', 'فاضية'),
-        ('pregnant', 'مليانة'),
-        ('mated', 'متلقحة'),
-        ('feeding', 'مرضعة'),
-        ('pregnant-feeding', 'حامل ومرضعة'),
-        ('mated-feeding', 'متلقحة ومرضعة'),
+        ('فاضية', 'فاضية'),
+        ('مليانة', 'مليانة'),
+        ('متلقحة', 'متلقحة'),
+        ('مرضعة', 'مرضعة'),
+        ('حامل و مرضعة', 'حامل و مرضعة'),
+        ('متلقحة و مرضعة', 'متلقحة و مرضعة'),
     )
     def __str__(self):
         return self.name

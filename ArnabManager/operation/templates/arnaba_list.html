@@ -4,12 +4,19 @@
 {% block b1 %}
 
 
-<div class="container row">
+<div class="row">
+  <a href="{% url 'operation:arnaba_create' %}"   class="btn-lg btn-block navbar-expand-lg btn btn-primary btn-secondary link-offset-2 link-underline link-underline-opacity-0"> <button  type="button" class="btn-lg btn-block btn btn-primary btn-secondary">  تسجـــــيل أرنبـــــة جديـــــدة</button> </a>
+</div>
+
+<div class="row">
 {% for arnaba in arnaba_list %}
 
 <div class="card col-lg-3 " style="width: 18rem;">
-    <img src="{% static arnaba.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image">
-    <div class="card-body">
+  
+  <a href="{% url 'operation:detail' arnaba.id %}">
+  <img src="{% static arnaba.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>
+</a>  
+  <div class="card-body">
       <h5 class="card-title">{{arnaba.name}}</h5>
       <p class="card-text">{{arnaba.state}}</p>
       <a href="{% url 'operation:detail' arnaba.id %}" class="btn btn-primary">متـــــابــعة</a>
