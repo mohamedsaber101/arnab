@@ -12,7 +12,7 @@ class Arnaba(models.Model):
     )
     def __str__(self):
         return self.name
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200,unique=True)
     desc = models.CharField(max_length=200)
     kind = models.CharField(max_length=200)
     birth_date = models.DateField(default=None)

@@ -1,9 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block b1 %}
+<link src="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
 {{arnab.name}}
 {{ arnab.id  }}
+<div class="container mt-3">
+    
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+      حـــــــذف
+    </button>
+  </div>
+  
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">حذف التسجيل؟</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          هل انت متأكـــــــــد؟
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">     لا     </button>
+ 
 
-<a href="{% url 'operation:arnaba_delete' arnab.id %}" type="button" class="btn btn-danger">حــــــذف</a>
+            <a href="{% url 'operation:arnaba_delete' arnab.id %}"  type="button btn-danger" class="btn btn-danger" >      نعــــم    </a>
+          </div>
+  
+      </div>
+    </div>
+  </div>
+
 
 {% endblock %}
