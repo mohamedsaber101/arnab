@@ -1,1 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block b1 %}
 {{arnab.name}}
+{{ arnab.id  }}
+
+<a href="{% url 'operation:arnaba_delete' arnab.id %}" type="button" class="btn btn-danger">حــــــذف</a>
+
+{% endblock %}

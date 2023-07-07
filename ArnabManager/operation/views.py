@@ -24,6 +24,12 @@ def detail(request, id):
         return render(request, 'detail.html',context)
 
 
+## DELETE
+
+def arnaba_delete(request, id):
+        arnab = Arnaba.objects.get(pk=id)
+        arnab.delete()
+        return arnaba_list(request)
 
 ###### FORMS
 def arnaba_create(request):
