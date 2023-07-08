@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='arnaba',
-            name='talqeeh_times',
+            name='مرات_التلقيح',
             field=models.IntegerField(default=None),
         ),
         migrations.AlterField(

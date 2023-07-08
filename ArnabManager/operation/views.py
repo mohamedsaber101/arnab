@@ -28,9 +28,10 @@ def detail(request, id):
         for field in fields:
               field_name = field.name
               field_value = arnab._meta.get_field(field.name).value_from_object(arnab)
-              self_field_list = {'name': field_name, 'value': field_value}
+              field_type = arnab._meta.get_field(field.name).__class__.description
+              self_field_list = {'name': field_name, 'value': field_value, 'type': field_type }
               field_list.append(self_field_list)
-
+              
 
         context = {
             'arnab': arnab,
