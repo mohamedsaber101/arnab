@@ -4,10 +4,35 @@
 {% block b1 %}
 <link src="{% static 'bootstrap.min.css' %}" rel="stylesheet">
 <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
-{{arnab.name}}
-{{ arnab.id  }}
+
+
+
+
 <div class="container mt-3">
-    
+
+ 
+
+
+<!-- ## FORM -->
+{% for field in field_list %}
+
+  <form action="/action_page.php">
+    <div class="mb-3 mt-3">
+      <label for="{{ field.name }}" class="form-label">{{ field.name }}:</label>
+      <input class="form-control" id="{{ field.name }}" value="{{ field.value  }}" name="{{ field.name }}">
+    </div>
+
+{% endfor %}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+  
+
+
+
+</div>
+
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
       حـــــــذف
     </button>
