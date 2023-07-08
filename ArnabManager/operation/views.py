@@ -47,8 +47,9 @@ def detail(request, id):
 
 def arnaba_delete(request, id):
         arnab = Arnaba.objects.get(pk=id)
+        alert="تم حـــــذف الأرنبـــــــــــــة " + arnab.name
         arnab.delete()
-        return arnaba_list(request)
+        return arnaba_list(request, alert)
 
 ###### FORMS
 ### ARANABA CREATE
