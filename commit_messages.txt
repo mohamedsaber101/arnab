@@ -4,3 +4,4 @@ update_for_arnaba_is_ok
 
 default_values_in_the_form_is_ok
 update_works
+alert_that_the_arnaba_is_updated_successfully

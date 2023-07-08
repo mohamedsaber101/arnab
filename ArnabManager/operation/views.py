@@ -6,17 +6,18 @@ from operation.forms import *
 from django.core import serializers
 # Create your views here.
 ### GLOBAL vars
-disabled_fields = ['id', 'birth_date']
+disabled_fields = ['id', 'birth_date', 'image']
 
 
 def index(request):
     return render(request, 'index.html')
 
 
-def arnaba_list(request):
+def arnaba_list(request, alert='nothing'):
     arnaba_list = Arnaba.objects.all()
     context = {
-        'arnaba_list': arnaba_list
+        'arnaba_list': arnaba_list,
+        'alert': alert
     }
     return render(request, 'arnaba_list.html', context)
 
@@ -27,8 +28,8 @@ def detail(request, id):
         for field in fields:
               field_name = field.name
               field_value = arnab._meta.get_field(field.name).value_from_object(arnab)
-              slef_field_list = {'name': field_name, 'value': field_value}
-              field_list.append(slef_field_list)
+              self_field_list = {'name': field_name, 'value': field_value}
+              field_list.append(self_field_list)
 
 
         context = {
@@ -79,18 +80,5 @@ def arnaba_update(request, id):
         if field.name not in disabled_fields:
             setattr(arnab, field.name, request.POST[field.name])
     arnab.save()
-
-    # form = NewArnabaForm()
-
-    # if request.method == "POST":
-    #     form = NewArnabaForm(request.POST)
-
-    #     if form.is_valid():
-    #            form.save(commit=True)
-    #            return arnaba_list(request)
-    #     else:
-    #            print('ERROR INVALID')
-    # context = {
-    #         'form': form
-    #     }
-    return render(request, 'index.html')
+    alert="تم تحــــــديث بيانات الارنبـــــــة "+ arnab.name 
+    return arnaba_list(request, alert)
