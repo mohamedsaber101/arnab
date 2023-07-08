@@ -14,17 +14,24 @@
 
 
 <!-- ## FORM -->
-{% for field in field_list %}
 
-  <form action="/action_page.php">
+
+  <form action="{% url 'operation:arnaba_update' arnab.id %}" method="post">
+    {% csrf_token %}
+    {% for field in field_list %}
     <div class="mb-3 mt-3">
+      {% if field.name in disabled_fields %}
+      <fieldset disabled>
+      {% endif %}
+
       <label for="{{ field.name }}" class="form-label">{{ field.name }}:</label>
       <input class="form-control" id="{{ field.name }}" value="{{ field.value  }}" name="{{ field.name }}">
     </div>
 
-{% endfor %}
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+      {% endfor %}
+
+    <button type="submit" class="btn btn-primary">تحـــــديــث</button>
   </form>
   
   
