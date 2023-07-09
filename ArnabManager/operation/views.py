@@ -10,7 +10,13 @@ disabled_fields = ['id', 'age', 'image']
 
 
 def index(request):
-    return render(request, 'index.html')
+    arnaba_count = Arnaba.objects.all().count()
+    arnab_count = Arnab.objects.all().count()
+    context = {
+         'arnaba_count': arnaba_count,
+         'arnab_count': arnab_count
+    }
+    return render(request, 'index.html', context)
 
 
 def arnaba_list(request, alert='nothing'):
