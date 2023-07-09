@@ -34,19 +34,25 @@ def detail(request, id):
         arnab = Arnaba.objects.get(pk=id)
         fields = arnab._meta.get_fields()
         field_list = []
+        arnab_list = []
         for field in fields:
+              foreign = False
               field_name = field.name
               field_value = getattr(arnab, field.name)
               field_type = arnab._meta.get_field(field.name).__class__.description
-              self_field_list = {'name': field_name, 'value': field_value, 'type': field_type }
+              if 'Foreign Key' in str(field_type):
+                  foreign = True
+                  arnab_list = Arnab.objects.all()
+              self_field_list = {'name': field_name, 'value': field_value, 'type': field_type, 'foreign': foreign }
               field_list.append(self_field_list)
               
-
+        print (field_list)
         context = {
             'arnab': arnab,
             'fields': fields,
             'field_list': field_list,
-            'disabled_fields': disabled_fields
+            'disabled_fields': disabled_fields,
+            'arnab_list': arnab_list
 
         }
         return render(request, 'detail.html',context)
@@ -55,12 +61,17 @@ def arnab_detail(request, id):
         arnab = Arnab.objects.get(pk=id)
         fields = arnab._meta.get_fields()
         field_list = []
+        print (arnab)
+        print (fields)
         for field in fields:
-              field_name = field.name
-              field_value = getattr(arnab, field.name)
-              field_type = arnab._meta.get_field(field.name).__class__.description
-              self_field_list = {'name': field_name, 'value': field_value, 'type': field_type }
-              field_list.append(self_field_list)
+              if 'Rel:' in str(field):
+                   pass
+              else:
+                field_name = field.name
+                field_value = getattr(arnab, field.name)
+                field_type = arnab._meta.get_field(field.name).__class__.description
+                self_field_list = {'name': field_name, 'value': field_value, 'type': field_type }
+                field_list.append(self_field_list)
               
 
         context = {
@@ -127,6 +138,13 @@ def arnab_create(request):
 ##### ARNABA UPDATE
 def arnaba_update(request, id):
     print (request.POST)
+    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
+    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
+
+    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
+    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
+    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
+
     print (id)
     arnaba = Arnaba.objects.get(pk=id)
     fields = arnaba._meta.get_fields()

@@ -40,8 +40,31 @@
       <fieldset disabled>
       {% endif %}
 
+      {% if field.foreign  %}
       <label for="{{ field.name }}" class="form-label">{{ field.name }}:</label>
-      <input {% if field.type == 'Integer' %}type="number"{% endif %}  class="form-control" id="{{ field.name }}" value="{{ field.value  }}" name="{{ field.name }}">
+
+
+
+      <select class="form-select" aria-label="Default select example" name="{{ field.name }}" id="{{ field.name }}">
+        <option selected>{{ field.value }}</option>
+
+        {% for arnab in arnab_list %}
+
+
+        <option value="{{ arnab.name }}" >{{ arnab.name}}</option>
+        {% endfor %}
+
+      </select>
+      {% else %}
+
+
+      <label for="{{ field.name }}" class="form-label">{{ field.name }}:</label>
+      <input {% if field.type == 'Integer' %}type="number"{% endif %} class="form-control" id="{{ field.name }}" value="{{ field.value  }}" name="{{ field.name }}">
+    
+
+      {% endif %} 
+
+
     </div>
 
 
@@ -113,7 +136,7 @@
 
         
               <label for="{{ field.name }}" class="form-label">{{ field.name }}:</label>
-              <input {% if field.type == 'Integer' %}type="number"{% endif %}  class="form-control" id="{{ field.name }}" value="{{ field.value  }}" name="{{ field.name }}">
+              <input {% if field.type == 'Integer' %}type="number"{% elif field.foreign == True %}type="number"{% endif %}  class="form-control" id="{{ field.name }}" value="{{ field.value  }}" name="{{ field.name }}">
             </div>
   
         
