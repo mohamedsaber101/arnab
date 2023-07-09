@@ -21,6 +21,14 @@ def arnaba_list(request, alert='nothing'):
     }
     return render(request, 'arnaba_list.html', context)
 
+def arnab_list(request, alert='nothing'):
+    arnab_list = Arnab.objects.all()
+    context = {
+        'arnab_list': arnab_list,
+        'alert': alert
+    }
+    return render(request, 'arnab_list.html', context)
+
 def detail(request, id):
         arnab = Arnaba.objects.get(pk=id)
         fields = arnab._meta.get_fields()
@@ -69,6 +77,22 @@ def arnaba_create(request):
         }
     return render(request, 'arnaba_create.html', context)
     
+
+def arnab_create(request):
+    form = NewArnabForm()
+
+    if request.method == "POST":
+        form = NewArnabForm(request.POST)
+
+        if form.is_valid():
+               form.save(commit=True)
+               return arnab_list(request)
+        else:
+               print('ERROR INVALID')
+    context = {
+            'form': form
+        }
+    return render(request, 'arnaba_create.html', context)
 
 
 ##### ARNABA UPDATE

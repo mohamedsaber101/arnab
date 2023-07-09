@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block b1 %}
+
+{% if alert != 'nothing' %}
+
+<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+  <strong>{{ alert }} </strong> 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endif %}
+
+<div class="row">
+  <a href="{% url 'operation:arnab_create' %}"   class="btn-lg btn-block navbar-expand-lg btn btn-primary btn-secondary link-offset-2 link-underline link-underline-opacity-0"> <button  type="button" class="btn-lg btn-block btn btn-primary btn-secondary"> تسجـــــيل أرنــــــب جديـــــد</button> </a>
+</div>
+
+<div class="row">
+{% for arnab in arnab_list %}
+
+<div class="card col-lg-3 " style="width: 18rem;">
+  
+  <a href="{% url 'operation:detail' arnab.id %}">
+  <img src="{% static arnab.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>
+</a>  
+  <div class="card-body">
+      <h5 class="card-title">{{arnab.name}}</h5>
+      <p class="card-text">{{arnab.state}}</p>
+      <a href="{% url 'operation:detail' arnab.id %}" class="btn btn-primary">متـــــابــعة</a>
+    </div>
+  </div>
+
+
+
+
+  {% endfor %}
+
+</div>
+
+
+
+{% endblock %}
+
+
+

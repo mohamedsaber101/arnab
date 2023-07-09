@@ -2,8 +2,16 @@
 {% load static %}
 
 {% block b1 %}
+
 <div class="row">
-<button type="button" class="btn btn-danger btn-lg btn-lg btn-block btn-block navbar-expand-lg btn btn-primary link-offset-2 link-underline link-underline-opacity-0" data-bs-toggle="modal" data-bs-target="#myModal">
+  <button type="button" class="btn btn-warning btn-lg btn-lg btn-block btn-block navbar-expand-lg btn btn-primary link-offset-2 link-underline link-underline-opacity-0" data-bs-toggle="modal" data-bs-target="#talqehModal">
+    تــــم التلقيــــــــح
+
+  </button>
+  </div>
+
+<div class="row">
+<button type="button" class="btn btn-danger btn-lg btn-lg btn-block btn-block navbar-expand-lg btn btn-primary link-offset-2 link-underline link-underline-opacity-0" data-bs-toggle="modal" data-bs-target="#deletionModal">
   حـــــــذف
 
   <svg xmlns="" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -52,8 +60,8 @@
 
 
   
-  <!-- The Modal -->
-  <div class="modal" id="myModal">
+  <!-- The DELETION Modal -->
+  <div class="modal" id="deletionModal">
     <div class="modal-dialog">
       <div class="modal-content">
   
@@ -80,5 +88,43 @@
     </div>
   </div>
 
+
+  <!-- The TALQEEH Modal -->
+  <div class="modal" id="talqehModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">تــم التلقيـــــح</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          هل انت متأكـــــــــد؟
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="mb-3 mt-3 modal-footer">
+          <form action="{% url 'operation:arnaba_update' arnab.id %}" method="post">
+            {% csrf_token %}
+            <div>
+
+        
+              <label for="{{ field.name }}" class="form-label">{{ field.name }}:</label>
+              <input {% if field.type == 'Integer' %}type="number"{% endif %}  class="form-control" id="{{ field.name }}" value="{{ field.value  }}" name="{{ field.name }}">
+            </div>
+  
+        
+            <button type="submit" class="form-control btn btn-primary btn-lg btn-block btn-block navbar-expand-lg" >  تحـــــديــث   <svg xmlns="" width="16" height="16" fill="currentColor" class="bi bi-capslock-fill" viewBox="0 0 16 16">
+              <path d="M7.27 1.047a1 1 0 0 1 1.46 0l6.345 6.77c.6.638.146 1.683-.73 1.683H11.5v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1H1.654C.78 9.5.326 8.455.924 7.816L7.27 1.047zM4.5 13.5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1z"/>
+            </svg></button>
+          </form>
+          </div>
+  
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

@@ -23,17 +23,18 @@
           <a href="{% url 'operation:arnaba_list' %}" class="btn btn-primary">متـــــابــعة</a>
         </div>
       </div>
-</a>
+    </a>
+
+    <a href="{% url 'operation:arnab_list' %}">
 
       <div class="card col-lg-4 " style="width: 18rem;">
         <img src="{% static 'arnab.png' %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image">
         <div class="card-body">
           <h5 class="card-title">ذكور</h5>
           <p class="card-text">الإجمـــالى</p>
-          <a href="#" class="btn btn-primary">متـــــابــعة</a>
+          <a href="{% url 'operation:arnab_list' %}" class="btn btn-primary">متـــــابــعة</a>
         </div>
       </div>
-
-
-    </div>
+    </a>
+</div>
 {% endblock %}
