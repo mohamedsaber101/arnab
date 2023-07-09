@@ -15,7 +15,7 @@ class Arnaba(models.Model):
     name = models.CharField(max_length=200,unique=True)
     desc = models.CharField(max_length=200)
     kind = models.CharField(max_length=200)
-    birth_date = models.DateField(default=None)
+    age = models.IntegerField()
     birth_times = models.IntegerField(default=None)
     talqeeh_times = models.IntegerField(default=None)
     state = models.CharField(max_length=200, choices= STATE_CHOICES, default='fadya')

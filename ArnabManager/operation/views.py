@@ -6,7 +6,7 @@ from operation.forms import *
 from django.core import serializers
 # Create your views here.
 ### GLOBAL vars
-disabled_fields = ['id', 'birth_date', 'image']
+disabled_fields = ['id', 'age', 'image']
 
 
 def index(request):
@@ -29,13 +29,14 @@ def arnab_list(request, alert='nothing'):
     }
     return render(request, 'arnab_list.html', context)
 
+#### DETAIL
 def detail(request, id):
         arnab = Arnaba.objects.get(pk=id)
         fields = arnab._meta.get_fields()
         field_list = []
         for field in fields:
               field_name = field.name
-              field_value = arnab._meta.get_field(field.name).value_from_object(arnab)
+              field_value = getattr(arnab, field.name)
               field_type = arnab._meta.get_field(field.name).__class__.description
               self_field_list = {'name': field_name, 'value': field_value, 'type': field_type }
               field_list.append(self_field_list)
@@ -50,6 +51,26 @@ def detail(request, id):
         }
         return render(request, 'detail.html',context)
 
+def arnab_detail(request, id):
+        arnab = Arnab.objects.get(pk=id)
+        fields = arnab._meta.get_fields()
+        field_list = []
+        for field in fields:
+              field_name = field.name
+              field_value = getattr(arnab, field.name)
+              field_type = arnab._meta.get_field(field.name).__class__.description
+              self_field_list = {'name': field_name, 'value': field_value, 'type': field_type }
+              field_list.append(self_field_list)
+              
+
+        context = {
+            'arnab': arnab,
+            'fields': fields,
+            'field_list': field_list,
+            'disabled_fields': disabled_fields
+
+        }
+        return render(request, 'arnab_detail.html',context)
 
 ## DELETE
 
@@ -58,6 +79,14 @@ def arnaba_delete(request, id):
         alert="تم حـــــذف الأرنبـــــــــــــة " + arnab.name
         arnab.delete()
         return arnaba_list(request, alert)
+
+## DELETE
+
+def arnab_delete(request, id):
+        arnab = Arnab.objects.get(pk=id)
+        alert="تم حـــــذف الأرنــــــــــــــب " + arnab.name
+        arnab.delete()
+        return arnab_list(request, alert)
 
 ###### FORMS
 ### ARANABA CREATE
@@ -99,12 +128,37 @@ def arnab_create(request):
 def arnaba_update(request, id):
     print (request.POST)
     print (id)
-    arnab = Arnaba.objects.get(pk=id)
+    arnaba = Arnaba.objects.get(pk=id)
+    fields = arnaba._meta.get_fields()
+    
+
+    field_list = []
+    for field in fields:
+        field_type = arnaba._meta.get_field(field.name).__class__.description
+        print (str(field_type))
+        if field.name not in disabled_fields:
+            if 'Foreign Key' not in str(field_type):
+                 setattr(arnaba, field.name, request.POST[field.name])
+            else:
+                 arnab = Arnab.objects.get(name=request.POST[field.name])
+                 setattr(arnaba, field.name, arnab)
+                 
+                 
+                 
+    arnaba.save()
+    alert="تم تحــــــديث بيانات الارنبـــــــة "+ arnaba.name 
+    return arnaba_list(request, alert)
+
+
+def arnab_update(request, id):
+    print (request.POST)
+    print (id)
+    arnab = Arnab.objects.get(pk=id)
     fields = arnab._meta.get_fields()
     field_list = []
     for field in fields:
         if field.name not in disabled_fields:
             setattr(arnab, field.name, request.POST[field.name])
     arnab.save()
-    alert="تم تحــــــديث بيانات الارنبـــــــة "+ arnab.name 
-    return arnaba_list(request, alert)
+    alert="تم تحــــــديث بيانات الارنـــــــــب "+ arnab.name 
+    return arnab_list(request, alert)

@@ -21,13 +21,13 @@
 
 <div class="card col-lg-3 " style="width: 18rem;">
   
-  <a href="{% url 'operation:detail' arnab.id %}">
+  <a href="{% url 'operation:arnab_detail' arnab.id %}">
   <img src="{% static arnab.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>
 </a>  
   <div class="card-body">
       <h5 class="card-title">{{arnab.name}}</h5>
       <p class="card-text">{{arnab.state}}</p>
-      <a href="{% url 'operation:detail' arnab.id %}" class="btn btn-primary">متـــــابــعة</a>
+      <a href="{% url 'operation:arnab_detail' arnab.id %}" class="btn btn-primary">متـــــابــعة</a>
     </div>
   </div>
 
