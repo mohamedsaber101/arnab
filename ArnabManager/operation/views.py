@@ -150,24 +150,29 @@ def arnaba_update(request, id):
     print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
     print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
     print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
+    print (len(request.POST))
+    print (request.POST)
 
     print (id)
     arnaba = Arnaba.objects.get(pk=id)
     fields = arnaba._meta.get_fields()
     
-
-    field_list = []
-    for field in fields:
-        field_type = arnaba._meta.get_field(field.name).__class__.description
-        print (str(field_type))
-        if field.name not in disabled_fields:
-            if 'Foreign Key' not in str(field_type):
-                 setattr(arnaba, field.name, request.POST[field.name])
-            else:
-                 arnab = Arnab.objects.get(name=request.POST[field.name])
-                 setattr(arnaba, field.name, arnab)
-                 
-                 
+    if len(request.POST) == 2 and 'talqeeh_zakar' in str(request.POST):
+         arnab = Arnab.objects.get(name=request.POST['talqeeh_zakar'])
+         setattr(arnaba, 'talqeeh_zakar', arnab)
+    else:
+        field_list = []
+        for field in fields:
+            field_type = arnaba._meta.get_field(field.name).__class__.description
+            print (str(field_type))
+            if field.name not in disabled_fields:
+                if 'Foreign Key' not in str(field_type):
+                    setattr(arnaba, field.name, request.POST[field.name])
+                else:
+                    arnab = Arnab.objects.get(name=request.POST[field.name])
+                    setattr(arnaba, field.name, arnab)
+                    
+                    
                  
     arnaba.save()
     alert="تم تحــــــديث بيانات الارنبـــــــة "+ arnaba.name 
@@ -181,7 +186,9 @@ def arnab_update(request, id):
     fields = arnab._meta.get_fields()
     field_list = []
     for field in fields:
-        if field.name not in disabled_fields:
+        if 'Rel:' in str(field):
+            pass
+        elif field.name not in disabled_fields:
             setattr(arnab, field.name, request.POST[field.name])
     arnab.save()
     alert="تم تحــــــديث بيانات الارنـــــــــب "+ arnab.name 
