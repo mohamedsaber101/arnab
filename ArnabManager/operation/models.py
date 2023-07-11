@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class Arnaba(models.Model):
@@ -20,7 +21,9 @@ class Arnaba(models.Model):
     talqeeh_times = models.IntegerField(default=None)
     state = models.CharField(max_length=200, choices= STATE_CHOICES, default='fadya')
     talqeeh_zakar =  models.ForeignKey("Arnab", on_delete=models.SET_NULL, blank=True, null=True)
+    talqeeh_datestamp = models.DateField(default=datetime.date.today())
     image =  models.CharField(max_length=200, default='arnaba.png')
+    
 
     
 

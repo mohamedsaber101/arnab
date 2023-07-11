@@ -49,6 +49,8 @@ def detail(request, id):
               if 'Foreign Key' in str(field_type):
                   foreign = True
                   arnab_list = Arnab.objects.all()
+              elif field_name == 'talqeeh_datestamp':
+                   field_value = getattr(arnab, 'talqeeh_datestamp').strftime("%Y-%m-%d")
               self_field_list = {'name': field_name, 'value': field_value, 'type': field_type, 'foreign': foreign }
               field_list.append(self_field_list)
               
@@ -166,11 +168,25 @@ def arnaba_update(request, id):
             field_type = arnaba._meta.get_field(field.name).__class__.description
             print (str(field_type))
             if field.name not in disabled_fields:
-                if 'Foreign Key' not in str(field_type):
-                    setattr(arnaba, field.name, request.POST[field.name])
-                else:
+
+                if 'talqeeh_zakar' == str(field.name):
                     arnab = Arnab.objects.get(name=request.POST[field.name])
-                    setattr(arnaba, field.name, arnab)
+                    setattr(arnaba, 'talqeeh_zakar', arnab)
+                elif 'talqeeh_datestamp' == str(field.name):
+                    print ('----------------------------------------------------------')
+                    print ('----------------------------------------------------------')
+                    print ('----------------------------------------------------------')
+                    print ('----------------------------------------------------------')
+                    print ('----------------------------------------------------------')
+
+                    day = int(str(request.POST[field.name]).split('-')[2])
+                    month = int(str(request.POST[field.name]).split('-')[1])
+                    year = int(str(request.POST[field.name]).split('-')[0])
+                    formatted_date = datetime.date(year, month, day)
+                    print (formatted_date)
+                    setattr(arnaba, 'talqeeh_datestamp', formatted_date)
+                else: 
+                    setattr(arnaba, field.name, request.POST[field.name])
                     
                     
                  
