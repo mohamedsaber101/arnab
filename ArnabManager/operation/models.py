@@ -5,7 +5,7 @@ import datetime
 class Arnaba(models.Model):
     STATE_CHOICES = (
         ('fadya', 'fadya'),
-        ('malyana', 'malyana'),
+        ('7amel', '7amel'),
         ('Metlaqa7a', 'Metlaqa7a'),
         ('Morde3a', 'Morde3a'),
         ('7amel w Morde3a', '7amel w Morde3a'),

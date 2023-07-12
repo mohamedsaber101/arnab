@@ -4,7 +4,7 @@
 {% block b1 %}
 
 <div class="row">
-  <button type="button" class="btn btn-warning btn-lg btn-lg btn-block btn-block navbar-expand-lg btn btn-primary link-offset-2 link-underline link-underline-opacity-0" data-bs-toggle="modal" data-bs-target="#talqehModal">
+  <button {% if '7amel' in arnab.state %}disabled class="btn-secondary btn  btn-lg btn-block btn-block navbar-expand-lg btn  link-offset-2 link-underline link-underline-opacity-0"{% endif%} type="button" class="btn btn-warning btn-lg btn-lg btn-block btn-block navbar-expand-lg btn btn-primary link-offset-2 link-underline link-underline-opacity-0" data-bs-toggle="modal" data-bs-target="#talqehModal">
     تــــم التلقيــــــــح
 
   </button>
@@ -61,8 +61,23 @@
       <label for="{{ field.name }}" class="form-label">{{ field.name }}:</label>
       {% if field.type == 'Date (without time)' %}
       <input  type="date" class="form-control" id="{{ field.name }}" value="{{ field.value }}"  name="{{ field.name }}">
+      {% elif field.type == 'Integer' %}
+      <input type="number" class="form-control" id="{{ field.name }}" value="{{ field.value}}" name="{{ field.name }}">
+
+
+      {% elif field.name == 'state'  %}
+      <select class="form-select" aria-label="Default select example" name="{{ field.name }}" id="{{ field.name }}">
+        <option selected>{{ field.value }}</option>
+        {% for state in state_after_talqeeh %}
+        <option value="{{ state.current }}" >{{ state.current }}</option>
+        {% endfor %}
+      </select>
+
+
+
+
       {% else %}
-      <input {% if field.type == 'Integer' %}type="number"{% endif %} class="form-control" id="{{ field.name }}" value="{{ field.value}}" name="{{ field.name }}">
+      <input class="form-control" id="{{ field.name }}" value="{{ field.value}}" name="{{ field.name }}">
       {% endif %}
 
       {% endif %} 

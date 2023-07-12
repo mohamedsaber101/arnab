@@ -8,6 +8,19 @@ from django.core import serializers
 ### GLOBAL vars
 disabled_fields = ['id', 'age', 'image']
 
+state_after_talqeeh = [
+        {'current': 'fadya', 'next': 'Metlaqa7a'},
+        {'current': '7amel', 'next':'7amel'},
+        {'current': 'Metlaqa7a', 'next':'Metlaqa7a'},
+        {'current': 'Morde3a', 'next':'Metlaqa7a w Morde3a'},
+        {'current': '7amel w Morde3a', 'next':'7amel w Morde3a'},
+        {'current': 'Metlaqa7a w Morde3a', 'next':'Metlaqa7a w Morde3a'} ]
+
+
+
+
+
+#####################################
 
 def index(request):
     arnaba_count = Arnaba.objects.all().count()
@@ -66,7 +79,8 @@ def detail(request, id):
             'field_list': field_list,
             'disabled_fields': disabled_fields,
             'arnab_list': arnab_list,
-            'todays_date': todays_date
+            'todays_date': todays_date,
+            'state_after_talqeeh': state_after_talqeeh
 
         }
         return render(request, 'detail.html',context)
@@ -166,13 +180,17 @@ def arnaba_update(request, id):
     fields = arnaba._meta.get_fields()
     
     if len(request.POST) == 3 and 'talqeeh_zakar' in str(request.POST) and 'talqeeh_datestamp' in str(request.POST):
-         arnab = Arnab.objects.get(name=request.POST['talqeeh_zakar'])
-         setattr(arnaba, 'talqeeh_zakar', arnab)
-         day = int(str(request.POST['talqeeh_datestamp']).split('-')[2])
-         month = int(str(request.POST['talqeeh_datestamp']).split('-')[1])
-         year = int(str(request.POST['talqeeh_datestamp']).split('-')[0])
-         formatted_date = datetime.date(year, month, day)
-         setattr(arnaba, 'talqeeh_datestamp', formatted_date)
+        arnab = Arnab.objects.get(name=request.POST['talqeeh_zakar'])
+        setattr(arnaba, 'talqeeh_zakar', arnab)
+        day = int(str(request.POST['talqeeh_datestamp']).split('-')[2])
+        month = int(str(request.POST['talqeeh_datestamp']).split('-')[1])
+        year = int(str(request.POST['talqeeh_datestamp']).split('-')[0])
+        formatted_date = datetime.date(year, month, day)
+        setattr(arnaba, 'talqeeh_datestamp', formatted_date)
+        for state in state_after_talqeeh:
+            if state['current'] == arnaba.state:
+                setattr(arnaba, 'state', state['next'] )
+
     else:
         field_list = []
         for field in fields:
