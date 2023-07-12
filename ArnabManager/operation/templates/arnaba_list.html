@@ -23,11 +23,12 @@
   {% for state in state_after_talqeeh %}
     {% if arnaba.state == state.current %}
       <div class="card  bg-{{ state.bg_color }} col-lg-3 col-sm-12 col-xs-12">
-    {% endif %}
-  {% endfor %}
+
 
   <a href="{% url 'operation:detail' arnaba.id %}">
-  <img src="{% static arnaba.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>
+  <img src="{% static state.photo  %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>
+  {% endif %}
+  {% endfor %}
 </a>  
   <div class="card-body">
     <div class=" text-center">

@@ -9,12 +9,12 @@ from django.core import serializers
 disabled_fields = ['id', 'age', 'image']
 
 state_after_talqeeh = [
-        {'current': 'fadya', 'next': 'Metlaqa7a', 'bg_color': 'secondary'}, #GREY
-        {'current': '7amel', 'next':'7amel', 'bg_color': 'success'},  #GREEN
-        {'current': 'Metlaqa7a', 'next':'Metlaqa7a', 'bg_color': 'info'}, #BLUE_GREEN
-        {'current': 'Morde3a', 'next':'Metlaqa7a w Morde3a', 'bg_color': 'primary'}, #BLUE
-        {'current': '7amel w Morde3a', 'next':'7amel w Morde3a', 'bg_color': 'danger'}, #RED
-        {'current': 'Metlaqa7a w Morde3a', 'next':'Metlaqa7a w Morde3a', 'bg_color': 'warning'} ] #YELLOW
+        {'current': 'fadya', 'next': 'Metlaqa7a', 'bg_color': 'secondary', 'photo': 'arnaba.png'}, #GREY
+        {'current': '7amel', 'next':'7amel', 'bg_color': 'success', 'photo': 'arnaba_7amel.png'},  #GREEN
+        {'current': 'Metlaqa7a', 'next':'Metlaqa7a', 'bg_color': 'info', 'photo': 'arnaba_molaqa7a.png'}, #BLUE_GREEN
+        {'current': 'Morde3a', 'next':'Metlaqa7a w Morde3a', 'bg_color': 'primary', 'photo': 'arnaba_morde3a.png'}, #BLUE
+        {'current': '7amel w Morde3a', 'next':'7amel w Morde3a', 'bg_color': 'danger', 'photo': 'arnaba_morde3a.png'}, #RED
+        {'current': 'Metlaqa7a w Morde3a', 'next':'Metlaqa7a w Morde3a', 'bg_color': 'warning', 'photo': 'arnaba_molqa7a_w_morde3a.png'} ] #YELLOW
 
 
 
@@ -166,17 +166,6 @@ def arnab_create(request):
 
 ##### ARNABA UPDATE
 def arnaba_update(request, id):
-    print (request.POST)
-    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
-    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
-
-    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
-    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
-    print ("=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-")
-    print (len(request.POST))
-    print (request.POST)
-
-    print (id)
     arnaba = Arnaba.objects.get(pk=id)
     fields = arnaba._meta.get_fields()
     
@@ -200,8 +189,9 @@ def arnaba_update(request, id):
             if field.name not in disabled_fields:
 
                 if 'talqeeh_zakar' == str(field.name):
-                    arnab = Arnab.objects.get(name=request.POST[field.name])
-                    setattr(arnaba, 'talqeeh_zakar', arnab)
+                    if request.POST['talqeeh_zakar'] != 'None':
+                        arnab = Arnab.objects.get(name=request.POST[field.name])
+                        setattr(arnaba, 'talqeeh_zakar', arnab)
                 elif 'talqeeh_datestamp' == str(field.name):
                     day = int(str(request.POST[field.name]).split('-')[2])
                     month = int(str(request.POST[field.name]).split('-')[1])
