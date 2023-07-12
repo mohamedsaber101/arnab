@@ -17,3 +17,4 @@ talqeeh_done_modal_is_ok
 update_date_from_detail_view_is_ok
 talqeeh_zakar_and_timestamp_are_done_in_update_and_modal
 update_state_after_talqee7
+list_reformatting_verbesserung

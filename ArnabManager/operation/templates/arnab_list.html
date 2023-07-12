@@ -25,9 +25,24 @@
   <img src="{% static arnab.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>
 </a>  
   <div class="card-body">
-      <h5 class="card-title">{{arnab.name}}</h5>
-      <p class="card-text">{{arnab.state}}</p>
-      <a href="{% url 'operation:arnab_detail' arnab.id %}" class="btn btn-primary">متـــــابــعة</a>
+
+
+
+      <div class=" text-center">
+      <div class="counter">
+      <i class="fa fa-code fa-2x"></i>
+      <a href="{% url 'operation:arnab_detail' arnab.id %} " style="text-decoration:none" >
+      <h2 class="timer count-title count-number text-muted" >{{ arnab.name }}</h2>
+      <h3 class="timer count-title count-number text-muted" >{{ arnab.state }}</h3>
+      </a>
+
+    </div>
+    </div>
+
+
+
+
+
     </div>
   </div>
 
