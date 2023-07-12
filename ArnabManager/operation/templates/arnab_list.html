@@ -19,7 +19,7 @@
 <div class="row">
 {% for arnab in arnab_list %}
 
-<div class="card col-lg-3 " style="width: 18rem;">
+<div class="card col-lg-3 col-xs-12 col-sm-12">
   
   <a href="{% url 'operation:arnab_detail' arnab.id %}">
   <img src="{% static arnab.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>

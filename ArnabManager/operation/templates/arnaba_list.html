@@ -13,14 +13,19 @@
 {% endif %}
 
 <div class="row">
-  <a href="{% url 'operation:arnaba_create' %}"   class="btn-lg btn-block navbar-expand-lg btn btn-primary btn-secondary link-offset-2 link-underline link-underline-opacity-0"> <button  type="button" class="btn-lg btn-block btn btn-primary btn-secondary">  تسجـــــيل أرنبـــــة جديـــــدة</button> </a>
+  <a href="{% url 'operation:arnaba_create' %}"   
+  class="btn-lg btn-block navbar-expand-lg btn btn-primary btn-secondary link-offset-2 link-underline link-underline-opacity-0"> <button  type="button" class="btn-lg bg-dark btn-block btn btn-primary btn-secondary">  
+    تسجـــــيل أرنبـــــة جديـــــدة</button> </a>
 </div>
-
+<div class="div"><br></div>
 <div class="row">
 {% for arnaba in arnaba_list %}
+  {% for state in state_after_talqeeh %}
+    {% if arnaba.state == state.current %}
+      <div class="card  bg-{{ state.bg_color }} col-lg-3 col-sm-12 col-xs-12">
+    {% endif %}
+  {% endfor %}
 
-<div class="card col-lg-3 " style="width: 18rem;">
-  
   <a href="{% url 'operation:detail' arnaba.id %}">
   <img src="{% static arnaba.image %}" style="height: 285px;" class="img-fluid img-thumbnail card-img-top img-fluid rounded float-left" alt="Responsive image"></img>
 </a>  
@@ -29,9 +34,9 @@
       <div class="counter">
       <i class="fa fa-code fa-2x"></i>
       <a href="{% url 'operation:detail' arnaba.id %} " style="text-decoration:none" >
-        <h2 class="timer count-title count-number text-muted" >{{ arnaba.name }}</h2>
+        <h2 class="timer count-title count-number text-white" >{{ arnaba.name }}</h2>
  
-        <h3 class="timer count-title count-number text-muted" >{{ arnaba.state }}</h3>    
+        <h3 class="timer count-title count-number text-white" >{{ arnaba.state }}</h3>    
        </a>
     </div>
     </div>

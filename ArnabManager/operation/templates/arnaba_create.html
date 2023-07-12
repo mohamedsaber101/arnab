@@ -4,11 +4,11 @@
 {% load bootstrap %}
 
 {% block b1 %}
-<div class="container ">
-<form method="POST">
+<div class="container">
+<form method="POST"  >
     {{ form|bootstrap  }}
     {% csrf_token %}
-    <input type="submit" class="btn btn-primary" value="تسجـــــيل">
+    <input type="submit" class="btn-block btn-lg col-12 col-12 btn btn-primary" value="تسجـــــيل">
 </form>
 </div>
 {% endblock %}

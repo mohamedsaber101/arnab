@@ -9,12 +9,12 @@ from django.core import serializers
 disabled_fields = ['id', 'age', 'image']
 
 state_after_talqeeh = [
-        {'current': 'fadya', 'next': 'Metlaqa7a'},
-        {'current': '7amel', 'next':'7amel'},
-        {'current': 'Metlaqa7a', 'next':'Metlaqa7a'},
-        {'current': 'Morde3a', 'next':'Metlaqa7a w Morde3a'},
-        {'current': '7amel w Morde3a', 'next':'7amel w Morde3a'},
-        {'current': 'Metlaqa7a w Morde3a', 'next':'Metlaqa7a w Morde3a'} ]
+        {'current': 'fadya', 'next': 'Metlaqa7a', 'bg_color': 'secondary'}, #GREY
+        {'current': '7amel', 'next':'7amel', 'bg_color': 'success'},  #GREEN
+        {'current': 'Metlaqa7a', 'next':'Metlaqa7a', 'bg_color': 'info'}, #BLUE_GREEN
+        {'current': 'Morde3a', 'next':'Metlaqa7a w Morde3a', 'bg_color': 'primary'}, #BLUE
+        {'current': '7amel w Morde3a', 'next':'7amel w Morde3a', 'bg_color': 'danger'}, #RED
+        {'current': 'Metlaqa7a w Morde3a', 'next':'Metlaqa7a w Morde3a', 'bg_color': 'warning'} ] #YELLOW
 
 
 
@@ -36,7 +36,8 @@ def arnaba_list(request, alert='nothing'):
     arnaba_list = Arnaba.objects.all()
     context = {
         'arnaba_list': arnaba_list,
-        'alert': alert
+        'alert': alert,
+        'state_after_talqeeh': state_after_talqeeh
     }
     return render(request, 'arnaba_list.html', context)
 
