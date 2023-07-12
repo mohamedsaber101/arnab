@@ -41,6 +41,11 @@ def detail(request, id):
         fields = arnab._meta.get_fields()
         field_list = []
         arnab_list = []
+        todays_year = str(datetime.date.today()).split ('-')[0]
+        todays_month = str(datetime.date.today()).split ('-')[1]
+        todays_day = str(datetime.date.today()).split ('-')[2]
+        todays_date = todays_year + '-' + todays_month + '-' + todays_day
+
         for field in fields:
               foreign = False
               field_name = field.name
@@ -60,7 +65,8 @@ def detail(request, id):
             'fields': fields,
             'field_list': field_list,
             'disabled_fields': disabled_fields,
-            'arnab_list': arnab_list
+            'arnab_list': arnab_list,
+            'todays_date': todays_date
 
         }
         return render(request, 'detail.html',context)
@@ -159,9 +165,14 @@ def arnaba_update(request, id):
     arnaba = Arnaba.objects.get(pk=id)
     fields = arnaba._meta.get_fields()
     
-    if len(request.POST) == 2 and 'talqeeh_zakar' in str(request.POST):
+    if len(request.POST) == 3 and 'talqeeh_zakar' in str(request.POST) and 'talqeeh_datestamp' in str(request.POST):
          arnab = Arnab.objects.get(name=request.POST['talqeeh_zakar'])
          setattr(arnaba, 'talqeeh_zakar', arnab)
+         day = int(str(request.POST['talqeeh_datestamp']).split('-')[2])
+         month = int(str(request.POST['talqeeh_datestamp']).split('-')[1])
+         year = int(str(request.POST['talqeeh_datestamp']).split('-')[0])
+         formatted_date = datetime.date(year, month, day)
+         setattr(arnaba, 'talqeeh_datestamp', formatted_date)
     else:
         field_list = []
         for field in fields:
@@ -173,17 +184,10 @@ def arnaba_update(request, id):
                     arnab = Arnab.objects.get(name=request.POST[field.name])
                     setattr(arnaba, 'talqeeh_zakar', arnab)
                 elif 'talqeeh_datestamp' == str(field.name):
-                    print ('----------------------------------------------------------')
-                    print ('----------------------------------------------------------')
-                    print ('----------------------------------------------------------')
-                    print ('----------------------------------------------------------')
-                    print ('----------------------------------------------------------')
-
                     day = int(str(request.POST[field.name]).split('-')[2])
                     month = int(str(request.POST[field.name]).split('-')[1])
                     year = int(str(request.POST[field.name]).split('-')[0])
                     formatted_date = datetime.date(year, month, day)
-                    print (formatted_date)
                     setattr(arnaba, 'talqeeh_datestamp', formatted_date)
                 else: 
                     setattr(arnaba, field.name, request.POST[field.name])
